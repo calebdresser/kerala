@@ -33,3 +33,26 @@ raintrendssmooth2019
 # Now lets export the data to a CSV file so we can get 
 # district level totals into our other file (by district)
 write.csv(rain2019, file = "2019 Rainfall in Centimeters.csv")
+
+###
+###
+### GREAT, NOW WE HAVE RAINFALL DATA IN OUR DISTRICT LIST FILE
+
+# Lets load the distric list file
+kerala <- read.csv( file = file.choose() , header = TRUE)
+
+# Lets peek at the data
+head (kerala)
+
+# Lets look at whether death rate was related to rainfall
+deathrain <- ggplot(data = kerala, aes (x = Rain2019, y = DEathRate2019)) + 
+geom_point (aes(color=District)) +
+xlab("Two Week Rainfall Estimate (cm)")+
+ylab("Death Rate")
+deathrain
+
+##
+##
+## OK, NOW WE NEED 2018 RAINFALL DATA 
+
+
