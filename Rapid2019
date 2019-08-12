@@ -33,16 +33,14 @@ worstrainsrate <- ggplot(krapid, aes (x = Pop_2011, y = Death_rate_2019)) + geom
 rain2019 <- read.csv(file = file.choose(),  header = TRUE)
 
 # add a column that is the minimum cutoff value for the categories on the IMS maps
-rain2019$RainCM <- with(rain2019, ifelse (Rainfall = 0, 0, 
-+ ifelse (Rainfall = 1, 0.1, 
-+ ifelse (Rainfall = 2, 2.5,
-+ ifelse (Rainfall = 3, 15.6,
-+ ifelse (Rainfall = 4, 64.5,
-+ ifelse (Rainfall = 5, 115.6, 0)
-))))))
-
+rain2019$RainCM <- with(rain2019, ifelse (Rainfall == 0, 0,
+ifelse (Rainfall == 1, 0.1, 
+ifelse (Rainfall == 2, 2.5,
+ifelse (Rainfall == 3, 15.6,
+ifelse (Rainfall == 4, 64.5,
+ifelse (Rainfall == 5, 115.6, 0)))))))
 
 #plot rainfall by day, color cod districts
-raintrends2019 <- ggplot(data=rain2019, aes (x = DayAug, y = Rainfall)) + geom_smooth(aes(color=Location, se = FALSE))
+raintrends2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location, se = FALSE))
 raintrends2019
 
