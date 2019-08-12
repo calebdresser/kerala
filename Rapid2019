@@ -40,7 +40,9 @@ ifelse (Rainfall == 3, 15.6,
 ifelse (Rainfall == 4, 64.5,
 ifelse (Rainfall == 5, 115.6, 0)))))))
 
-#plot rainfall by day, color cod districts
-raintrends2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location, se = FALSE))
-raintrends2019
+#plot rainfall by day, color code districts
+raintrendssmooth2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location), n= 100, se = FALSE)
+raintrendssmooth2019
 
+raintrendsjitter2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsjitter2019
