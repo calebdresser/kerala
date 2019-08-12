@@ -1,38 +1,14 @@
 # Caleb Dresser MD
 # BIDMC / HSPH / FXB
 
-# Import data file
-krapid <- read.csv(file = file.choose(), header = TRUE)
+###
+### LETS CLEAN UP THE RAINFALL TREND DATA
 
-# Look at the data
-krapid
-
-# Plot deaths in relation to population density
-plot (Deaths_2019 ~ Pop_dens, data = krapid)
-
-# Plot deaths in relation to total population
-plot (Deaths_2019 ~ Pop_2011, data = krapid)
-
-# make a column for mortality rate
-krapid$death_rate <- with(krapid, krapid$Deaths_2019 / krapid$Pop_2011)
-
-# graph relationship between camp numbers and deaths
-fancyplot <- ggplot(krapid, aes (x = Camps_2019, y = Deaths_2019)) + geom_point(aes(size = krapid$death_rate))
-fancyplot
-
-# look at whether worst hit districts from composite image had mmore deaths or higher death rate
-worstrainsgross <- ggplot(krapid, aes (x = Pop_2011, y = Deaths_2019)) + geom_point(aes(color = Worst_rains_2019))
-worstrainsrate <- ggplot(krapid, aes (x = Pop_2011, y = Death_rate_2019)) + geom_point(aes(color = Worst_rains_2019))
-
-##
-##
-
-## RAINFALL TREND DATA
-
-#import the rainfall data (coded from 0 to 5 based on indian meteorological service rainmaps)
+#import the rainfall data (hand-coded from 0 to 5 based on indian meteorological service rainmap JPG files)
 rain2019 <- read.csv(file = file.choose(),  header = TRUE)
 
-# add a column that is the minimum cutoff value for the categories on the IMS maps
+# add a column that is raingall in centimeters, based on 
+# the minimum cutoff value for each category on the IMS maps
 rain2019$RainCM <- with(rain2019, ifelse (Rainfall == 0, 0,
 ifelse (Rainfall == 1, 0.1, 
 ifelse (Rainfall == 2, 2.5,
@@ -40,9 +16,20 @@ ifelse (Rainfall == 3, 15.6,
 ifelse (Rainfall == 4, 64.5,
 ifelse (Rainfall == 5, 115.6, 0)))))))
 
-#plot rainfall by day, color code districts
-raintrendssmooth2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location), n= 100, se = FALSE)
-raintrendssmooth2019
+# look at the data
+head(rain2019)
 
+#plot rainfall by day, color code districts
+# variety of visualization options in ggplot2
 raintrendsjitter2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
 raintrendsjitter2019
+
+raintrendsjitter2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsline2019
+
+raintrendssmooth2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
+raintrendssmooth2019
+
+# Now lets export the data to a CSV file so we can get 
+# district level totals into our other file (by district)
+write.csv(rain2019, file = "2019 Rainfall in Centimeters.csv")
