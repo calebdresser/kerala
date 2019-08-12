@@ -2,3 +2,16 @@
 # BIDMC / HSPH / FXB
 
 # Import data file
+krapid <- read.csv(file = file.choose(), header = TRUE)
+
+# Look at the data
+krapid
+
+# Plot deaths in relation to population density
+plot (Deaths_2019 ~ Pop_dens, data = krapid)
+
+# Plot deaths in relation to total population
+plot (Deaths_2019 ~ Pop_2011, data = krapid)
+
+# make a column for mortality rate
+krapid$death_rate <- with(krapid, krapid$Deaths_2019 / krapid$Pop_2011)
