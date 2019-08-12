@@ -19,3 +19,10 @@ krapid$death_rate <- with(krapid, krapid$Deaths_2019 / krapid$Pop_2011)
 # graph relationship between camp numbers and deaths
 fancyplot <- ggplot(krapid, aes (x = Camps_2019, y = Deaths_2019)) + geom_point(aes(size = krapid$death_rate))
 fancyplot
+
+# look at whether worst hit districts from composite image had mmore deaths or higher death rate
+worstrainsgross <- ggplot(krapid, aes (x = Pop_2011, y = Deaths_2019)) + geom_point(aes(color = Worst_rains_2019))
+worstrainsrate <- ggplot(krapid, aes (x = Pop_2011, y = Death_rate_2019)) + geom_point(aes(color = Worst_rains_2019))
+
+#import the rainfall data (coded from 0 to 5 based on indian meteorological service rainmaps)
+2019rain <- read.csv(file = file.choose(),  header = TRUE)
