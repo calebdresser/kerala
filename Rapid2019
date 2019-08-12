@@ -15,3 +15,7 @@ plot (Deaths_2019 ~ Pop_2011, data = krapid)
 
 # make a column for mortality rate
 krapid$death_rate <- with(krapid, krapid$Deaths_2019 / krapid$Pop_2011)
+
+# graph relationship between camp numbers and deaths
+fancyplot <- ggplot(krapid, aes (x = Camps_2019, y = Deaths_2019)) + geom_point(aes(size = krapid$death_rate))
+fancyplot
