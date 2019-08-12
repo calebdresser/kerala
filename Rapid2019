@@ -24,5 +24,19 @@ fancyplot
 worstrainsgross <- ggplot(krapid, aes (x = Pop_2011, y = Deaths_2019)) + geom_point(aes(color = Worst_rains_2019))
 worstrainsrate <- ggplot(krapid, aes (x = Pop_2011, y = Death_rate_2019)) + geom_point(aes(color = Worst_rains_2019))
 
+##
+##
+
+## RAINFALL TREND DATA
+
 #import the rainfall data (coded from 0 to 5 based on indian meteorological service rainmaps)
-2019rain <- read.csv(file = file.choose(),  header = TRUE)
+rain2019 <- read.csv(file = file.choose(),  header = TRUE)
+
+# add a column that is the minimum cutoff value for the categories on the IMS maps
+rain2019$RainCM <- with(rain2019, IF
+
+
+#plot rainfall by day, color cod districts
+raintrends2019 <- ggplot(data=rain2019, aes (x = DayAug, y = Rainfall)) + geom_smooth(aes(color=Location, se = FALSE))
+raintrends2019
+
