@@ -55,4 +55,28 @@ deathrain
 ##
 ## OK, NOW WE NEED 2018 RAINFALL DATA 
 
+#import the rainfall data (hand-coded from 0 to 5 based on indian meteorological service rainmap JPG files)
+rain2018 <- read.csv(file = file.choose(),  header = TRUE)
 
+# add a column that is raingall in centimeters, based on 
+# the minimum cutoff value for each category on the IMS maps
+rain2018$RainCM <- with(rain2018, ifelse (Rainfall == 0, 0,
+ifelse (Rainfall == 1, 0.1, 
+ifelse (Rainfall == 2, 2.5,
+ifelse (Rainfall == 3, 15.6,
+ifelse (Rainfall == 4, 64.5,
+ifelse (Rainfall == 5, 115.6, 0)))))))
+
+# look at the data
+head(rain2018)
+
+#plot rainfall by day, color code districts
+# variety of visualization options in ggplot2
+raintrendsjitter2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsjitter2018
+
+raintrendsjitter2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsline2018
+
+raintrendssmooth2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
+raintrendssmooth2018
