@@ -111,4 +111,37 @@ rainscatter <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point
 geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800) + ylim(0, 800)
 rainscatter
 
+# Hmmm ... not much there. Maybe it's just really dangerous when it rains a lot...
+
+# Now lets see how different districts reacted in terms of building camps in relation rainfall 
+# in both 2019 and 2018
+
+rainscatter <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point(aes(),size=(0.01*kerala$Camps2019)) +
+geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800) + ylim(0, 800)
+rainscatter
+
+# OK this is a bit more interesting... looks like if it rained a lot in 2018,
+# you maybe built more camps in 2019? Lets explore further:
+
+p1 <- ggplot(data=kerala, aes(x=Rain2019, y=Camps2019)) + geom_point()
+
+p2 <- ggplot(data=kerala, aes(x=Rain2018, y=Camps2019)) + geom_point()
+
+# Nope, nothing there either. Seems like our best explainer of death rate was how much it rained this year.
+deathplotrain <- ggplot(data = kerala, aes (x=Rain2019, y=DeathRate2019)) + geom_point(aes())
+deathplotrain
+
+# Lets see how the 2019 rainfall estimate relates to some other dependent variables
+campplotrain <- ggplot(data = kerala, aes (x=Rain2019, y=Camps2019)) + geom_point(aes())
+campplotrain
+
+#...that was unimpressive, but we dont' know how big the camps are. How about people?
+
+camppeopleplotrain <- ggplot(data = kerala, aes (x=Rain2019, y=CampPeople2019)) + geom_point(aes())
+camppeopleplotrain
+
+#seems like there's a bit more there.
+
+
+
 
