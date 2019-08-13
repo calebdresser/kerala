@@ -103,5 +103,12 @@ ggtitle("2019 Rainfall in Comparison to 2018 Rainfall (estimated, cm)")
 rainscatter <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point() +
 geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800)+ylim(0, 800)
 
+# OK - now we can see if there's any relationship between the mortality rate observed in 2019
+# and the position of these points (ie. was there a protective effect to having experinced 
+# lots of rain last year? was there risk associated with not having seen heavy rain last year?
+
+rainscatter <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point(aes(),size=(kerala$DeathRate2019*500000)) +
+geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800) + ylim(0, 800)
+rainscatter
 
 
