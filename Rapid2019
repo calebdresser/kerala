@@ -140,8 +140,8 @@ campplotrain
 camppeopleplotrain <- ggplot(data = kerala, aes (x=Rain2019, y=CampPeople2019)) + geom_point(aes())
 camppeopleplotrain
 
-#seems like there's a bit more there.
-
-
+#one final look at whether getting a lot more rain than last time was dangerous
+deathplotdifference <- ggplot(data = kerala, aes (x=RainDifference, y=DeathRate2019)) + geom_point(aes())
+deathplotdifference
 
 
