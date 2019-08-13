@@ -21,13 +21,10 @@ head(rain2019)
 
 #plot rainfall by day, color code districts
 # variety of visualization options in ggplot2
-raintrendsjitter2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
-raintrendsjitter2019
-
-raintrendsjitter2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsline2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
 raintrendsline2019
 
-raintrendssmooth2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
+raintrendssmooth2019 <- ggplot(data=rain2019, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location), n=14, se=FALSE)
 raintrendssmooth2019
 
 # Now lets export the data to a CSV file so we can get 
@@ -72,11 +69,12 @@ head(rain2018)
 
 #plot rainfall by day, color code districts
 # variety of visualization options in ggplot2
-raintrendsjitter2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
-raintrendsjitter2018
-
-raintrendsjitter2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_jitter(aes(color=Location))
+raintrendsline2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
 raintrendsline2018
 
-raintrendssmooth2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_line(aes(color=Location))
+raintrendssmooth2018 <- ggplot(data=rain2018, aes (x = DayAug, y = RainCM)) + geom_smooth(aes(color=Location), n=14, se=FALSE)
 raintrendssmooth2018
+
+# Now lets export the data to a CSV file so we can get 
+# district level totals into our other file (by district)
+write.csv(rain2018, file = "2018 Rainfall in Centimeters.csv")
