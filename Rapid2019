@@ -97,9 +97,11 @@ kerala
 raincomp <- ggplot (data = kerala, aes(x=District, y= RainDifference)) + geom_col() + 
 ggtitle("2019 Rainfall in Comparison to 2018 Rainfall (estimated, cm)")
 
-# Now, lets look at 2018 vs 2019 rainfall; if they were the same in each place
-# we'd see a strait line
-
+# We can also look at 2018 vs 2019 rainfall as a scatterplot; if they were the 
+# same in each place we'd see a strait line (indicated 
+# by the solid line, showing 1:1 ratio)
+rainscatter <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point() +
+geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800)+ylim(0, 800)
 
 
 
