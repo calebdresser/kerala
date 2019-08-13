@@ -78,3 +78,28 @@ raintrendssmooth2018
 # Now lets export the data to a CSV file so we can get 
 # district level totals into our other file (by district)
 write.csv(rain2018, file = "2018 Rainfall in Centimeters.csv")
+
+##
+##
+## SO NOW WE HAVE A FILE WITH EACH DISTRICT AND ASSOCIATED
+## IMPACT DATA FROM 2019, PLUS RAINFALL FROM 2018 and 2019
+
+#lets load our dataset
+kerala <- read.csv (file = file.choose(), header = TRUE)
+
+# lets look at the data
+head(kerala)
+
+# Lets see how rainfall in 2019 compared with 2018
+kerala$RainDifference <- with(data = kerala, Rain2019 - Rain2018)
+kerala
+
+raincomp <- ggplot (data = kerala, aes(x=District, y= RainDifference)) + geom_col() + 
+ggtitle("2019 Rainfall in Comparison to 2018 Rainfall (estimated, cm)")
+
+# Now, lets look at 2018 vs 2019 rainfall; if they were the same in each place
+# we'd see a strait line
+
+
+
+
