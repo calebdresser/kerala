@@ -154,3 +154,39 @@ deathsvsyear <- ggplot (data = kerala) +
 geom_point(aes(x=Rain2018, y=DeathRate2019), color="red") +
 geom_point(aes(x=Rain2019, y=DeathRate2019), color="blue")
 deathsvsyear
+
+
+####
+####
+#### With partial new data from Kerala State Disaster Management Authority 
+#### (KSDMA) at district levvel between August 8 and August 14 till 3 pm
+deathsmissing <- ggplot(data=kerala, aes (x = Rain14Aug, y = Deathsplusmissing14th)) + 
+geom_point(aes(color=District)) +
+xlab ("Total 14-day rainfall as of 14 August (est. via hand-coded rain map images)") +
+ylab ("Total deaths plus missing persons")
+deathsmissing
+
+kerala$deathmissingrate14th <- with(kerala, (Deathsplusmissing14th / Pop))
+head (kerala)
+
+deathsmissingrate <- ggplot(data=kerala, aes (x = Rain14Aug, y = deathmissingrate14th)) + 
+geom_point(aes(color=District)) +
+xlab ("Total 14-day rainfall as of 14 August (est. via hand-coded rain map images)") +
+ylab ("Deaths plus missing persons rate")
+deathsmissingrate
+
+
+deathsmissingrate18 <- ggplot(data=kerala, aes (x = Rain2018, y = deathmissingrate14th)) + 
+geom_point(aes(color=District)) +
+xlab ("2018 Rainfall Estimated)") +
+ylab ("Deaths plus missing persons rate")
+deathsmissingrate18
+
+kerala$raindiff14aug <- with(data = kerala, (Rain14Aug - Rain2018))
+head(kerala)
+
+deathsmissingvsdiff <- ggplot(data=kerala, aes (x = raindiff14aug, y = deathmissingrate14th)) + 
+geom_point(aes(color=District)) +
+xlab ("Difference between 2019 (14 aug) and 2018 rainfall (neg=more rain in 2018)") +
+ylab ("Deaths plus missing persons rate")
+deathsmissingvsdiff
