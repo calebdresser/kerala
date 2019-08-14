@@ -190,3 +190,10 @@ geom_point(aes(color=District)) +
 xlab ("Difference between 2019 (14 aug) and 2018 rainfall (neg=more rain in 2018)") +
 ylab ("Deaths plus missing persons rate")
 deathsmissingvsdiff
+
+# We can also look at 2018 vs 2019aug14 rainfall as a scatterplot; if they were the 
+# same in each place we'd see a strait line (indicated 
+# by the solid line, showing 1:1 ratio)
+rainscatteraug14 <- ggplot (data = kerala, aes (x=Rain2018, y=Rain2019)) + geom_point(size=500000*kerala$deathmissingrate14th) +
+geom_segment(aes(x = 0, y = 0, xend = 400, yend = 400)) + xlim(0, 800)+ylim(0, 800)
+rainscatteraug14
